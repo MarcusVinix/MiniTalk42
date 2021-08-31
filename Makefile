@@ -39,3 +39,4 @@ re: fclean all
 git:
 	git add .
 	git commit -m "trying send a message"
+	git push origin master
