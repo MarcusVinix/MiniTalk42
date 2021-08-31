@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/30 20:55:21 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/31 10:41:49 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,51 @@
 #include <stdio_ext.h>
 #include "minitalk.h"
 
-void	ft_putchar(char c)
+static char	*store_bytes(char *str, char c)
 {
-	write(1, &c, 1);
+	char	*tmp;
+	int		i;
+	tmp = malloc((ft_strlen(str) + 2) * sizeof(char));
+	if (tmp == NULL)
+	{
+		if (str)
+			free(str);
+		return (NULL);
+	}
+	i = 0;
+	if (!str)
+	{
+		tmp[i] = c;
+		tmp[++i] = '\0';
+		return (tmp);
+	}
+	i = -1;
+	while (str[++i])
+		tmp[i] = str[i];
+	tmp[i++] = c;
+	tmp[i] = '\0';
+	free(str);
+	return (tmp);
 }
-
 
 void	get_msg(int sig)
 {
 	static int	byte;
 	static int	bit;
+	static char	*str;
 
 	if (sig == SIGUSR2)
 		byte += 1 << (7 - bit);
 	if (++bit == 8)
 	{
 		if (byte)
-			ft_putchar_fd(byte, 1);
+			str = store_bytes(str, byte);
 		else
-			ft_putchar_fd('\n', 1);
+		{
+			ft_putendl_fd(str, 1);
+			free(str);
+			str = NULL;
+		}
 		bit = 0;
 		byte = 0;
 	}

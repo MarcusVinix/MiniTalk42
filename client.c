@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 14:53:48 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/30 16:19:07 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/30 23:04:15 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,17 @@ void	handle(int pid, char *str)
 int			main(int argc, char **argv)
 {
 	int		pid;
+	int		i;
 
 	if (argc != 3)
 	{
 		ft_putstr_fd("format: ./client pid \"message\"\n", 1);
 		exit(0);
 	}
-	pid = atoi(argv[1]);
-	handle(pid, argv[2]);
+	pid = ft_atoi(argv[1]);
+	i = 0;
+	while (*(*(argv + 2) + i))
+		send_message(pid, *(*(argv + 2) + i++));
+	send_message(pid, 0);
 	return (0);
 }

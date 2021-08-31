@@ -6,7 +6,7 @@ CLIENT = client
 SERVER = server
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 all: $(LIBFT) $(CLIENT) $(SERVER)
@@ -38,5 +38,5 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "trying send a message"
+	git commit -m "doing a function to store the message"
 	git push origin master
