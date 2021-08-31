@@ -1,42 +1,37 @@
 PATH_SRC = ./src/
-PATH_OBJ = ./objs/
-PATH_LIBFT = ./42libft/
-LIBFT = $(PATH_LIBFT)libft.a
 CLIENT = client
 SERVER = server
 
+UTILS = ./utils.c
+FILES_S = ./server.c
+FILES_C = ./client.c
+
+OBJ_UTILS = $(UTILS:.c=.o)
+OBJ_SERVER = $(FILES_S:.c=.o)
+OBJ_CLIENT = $(FILES_C:.c=.o)
+
 CC = clang
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
-all: $(LIBFT) $(CLIENT) $(SERVER)
+all: $(CLIENT) $(SERVER)
 
-$(LIBFT):
-	@make -C $(PATH_LIBFT)
 
-$(CLIENT):
-	$(CC) $(CFLAGS) client.c $(LIBFT) -o $(CLIENT)
+$(CLIENT): $(OBJ_CLIENT) $(OBJ_UTILS)
+	$(CC) $(CFLAGS) $(OBJ_CLIENT)  $(OBJ_UTILS) -o $(CLIENT)
 
-$(SERVER):
-	$(CC) $(CFLAGS) server.c $(LIBFT) -o $(SERVER)
-
-#
-#server:
-#	$(CC) $(CFLAGS) server.c -o server
-#
-#client:
-#	$(CC) $(CFLAGS) client.c -o client
+$(SERVER): $(OBJ_SERVER) $(OBJ_UTILS)
+	$(CC) $(CFLAGS) $(OBJ_SERVER) $(OBJ_UTILS) -o $(SERVER)
 
 clean:
 	$(RM) $(OBJS)
 
 fclean:	clean
-	make fclean -C $(PATH_LIBFT)
 	$(RM) server client
 
 re: fclean all
 
 git:
 	git add .
-	git commit -m "doing a function to store the message"
+	git commit -m "send a signal to confirm message received"
 	git push origin master

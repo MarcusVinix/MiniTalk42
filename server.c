@@ -6,10 +6,9 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/31 11:35:45 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/31 20:36:04 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minitalk.h"
 
@@ -40,8 +39,9 @@ static char	*store_bytes(char *str, char c)
 	return (tmp);
 }
 
-void	get_msg(int sig)
+static void	get_msg(int sig, siginfo_t *info, void *ucontext)
 {
+	(void)ucontext;
 	static int	byte;
 	static int	bit;
 	static char	*str;
@@ -58,30 +58,46 @@ void	get_msg(int sig)
 			write(1, "\n\n", 2);
 			free(str);
 			str = NULL;
+			kill(info->si_pid, SIGUSR1);
 		}
 		bit = 0;
 		byte = 0;
 	}
+}
 
+void	ft_putnbr_fd(int n, int fd)
+{
+	unsigned int	number;
+
+	number = 0;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		number = n * -1;
+	}
+	else
+		number = n;
+	if (number >= 10)
+	{
+		ft_putnbr_fd(number / 10, fd);
+	}
+	ft_putchar_fd(number % 10 + '0', fd);
 }
 
 int	main()
 {
 	struct sigaction sa;
-	
 
-
-	sa.sa_handler = get_msg;
-	sa.sa_flags = 0;
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = get_msg;
 	if (sigemptyset(&sa.sa_mask) == -1
 		|| sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		return (-1);
 	ft_putnbr_fd(getpid(), 1);
-	ft_putendl_fd("\n", 1);
+	write(1, "\n\n", 2);
 	while (1)
 		pause();
 	return (0);
 }
-
 
