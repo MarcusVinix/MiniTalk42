@@ -38,4 +38,4 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "starting the project"
+	git commit -m "trying send a message"

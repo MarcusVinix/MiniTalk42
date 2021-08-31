@@ -6,11 +6,12 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/30 14:31:37 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/30 20:55:21 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdio_ext.h>
 #include "minitalk.h"
 
 void	ft_putchar(char c)
@@ -42,6 +43,8 @@ int	main()
 {
 	struct sigaction sa;
 	
+
+
 	sa.sa_handler = get_msg;
 	sa.sa_flags = 0;
 	if (sigemptyset(&sa.sa_mask) == -1
@@ -54,3 +57,5 @@ int	main()
 		pause();
 	return (0);
 }
+
+
