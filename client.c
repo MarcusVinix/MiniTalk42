@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 14:53:48 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/30 23:04:15 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/31 12:08:56 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int			main(int argc, char **argv)
 	i = 0;
 	while (*(*(argv + 2) + i))
 		send_message(pid, *(*(argv + 2) + i++));
-	send_message(pid, 0);
+	send_message(pid, '\0');
 	return (0);
 }

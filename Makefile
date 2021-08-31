@@ -6,7 +6,7 @@ CLIENT = client
 SERVER = server
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror 
 RM = rm -rf
 
 all: $(LIBFT) $(CLIENT) $(SERVER)
