@@ -33,5 +33,5 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "send a signal to confirm message received"
+	git commit -m "remove .o"
 	git push origin master
