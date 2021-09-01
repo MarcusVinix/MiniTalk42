@@ -23,6 +23,8 @@ $(CLIENT): $(OBJ_CLIENT) $(OBJ_UTILS)
 $(SERVER): $(OBJ_SERVER) $(OBJ_UTILS)
 	$(CC) $(CFLAGS) $(OBJ_SERVER) $(OBJ_UTILS) -o $(SERVER)
 
+bonus: all
+
 clean:
 	$(RM) $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_UTILS)
 
@@ -33,5 +35,5 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "change the message"
+	git commit -m "add rule bonus"
 	git push origin master
