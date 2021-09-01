@@ -24,7 +24,7 @@ $(SERVER): $(OBJ_SERVER) $(OBJ_UTILS)
 	$(CC) $(CFLAGS) $(OBJ_SERVER) $(OBJ_UTILS) -o $(SERVER)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_UTILS)
 
 fclean:	clean
 	$(RM) server client
