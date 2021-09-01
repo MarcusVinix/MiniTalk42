@@ -1,0 +1,4 @@
+test.sh
+*.o
+server
+client
