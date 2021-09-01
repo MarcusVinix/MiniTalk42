@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 14:53:48 by mavinici          #+#    #+#             */
-/*   Updated: 2021/09/01 09:31:00 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/09/01 14:20:29 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,17 @@ void	send_message(int pid, int c)
 	while (bit--)
 	{
 		if (!(c & 1 << bit))
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1))
+				exit(0);
+		}
 		else
-			kill(pid, SIGUSR2);
-		usleep(100);
+		{
+			if (kill(pid, SIGUSR2))
+				exit(0);
+		}
+		if (usleep(100))
+			exit(0);
 	}
 }
 
