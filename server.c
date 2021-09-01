@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/09/01 09:52:05 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/09/01 15:07:58 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,6 @@ static void	get_msg(int sig, siginfo_t *info, void *ucontext)
 	}
 }
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	unsigned int	number;
-
-	number = 0;
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		number = n * -1;
-	}
-	else
-		number = n;
-	if (number >= 10)
-	{
-		ft_putnbr_fd(number / 10, fd);
-	}
-	ft_putchar_fd(number % 10 + '0', fd);
-}
-
 void	close_server(int sig)
 {
 	(void)sig;
@@ -91,15 +72,35 @@ void	close_server(int sig)
 	exit(0);
 }
 
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*s_s;
+	size_t			i;
+
+	i = 0;
+	s_s = (unsigned char *)s;
+	while (i < n)
+	{
+		s_s[i] = '\0';
+		i++;
+	}
+}
+
 int	main(void)
 {
 	struct sigaction	sa;
+	sigset_t			mask;
 
+	if (sigemptyset(&mask) == -1
+		|| sigaddset(&mask, SIGUSR1) == -1
+		|| sigaddset(&mask, SIGUSR2) == -1)
+		exit(0);
+	ft_bzero(&sa, sizeof(struct sigaction));
+	sa.sa_mask = mask;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = get_msg;
 	signal(SIGINT, close_server);
-	if (sigemptyset(&sa.sa_mask) == -1
-		|| sigaction(SIGUSR1, &sa, NULL) == -1
+	if (sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		return (-1);
 	write(1, "\nPID: ", 7);
