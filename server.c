@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/09/01 09:28:20 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/09/01 09:52:05 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,20 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putchar_fd(number % 10 + '0', fd);
 }
 
+void	close_server(int sig)
+{
+	(void)sig;
+	write(1, "\nBYE!\n", 6);
+	exit(0);
+}
+
 int	main(void)
 {
 	struct sigaction	sa;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = get_msg;
+	signal(SIGINT, close_server);
 	if (sigemptyset(&sa.sa_mask) == -1
 		|| sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)

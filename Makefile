@@ -18,22 +18,26 @@ all: $(CLIENT) $(SERVER)
 
 
 $(CLIENT): $(OBJ_CLIENT) $(OBJ_UTILS)
-	$(CC) $(CFLAGS) $(OBJ_CLIENT)  $(OBJ_UTILS) -o $(CLIENT)
+	@$(CC) $(CFLAGS) $(OBJ_CLIENT)  $(OBJ_UTILS) -o $(CLIENT)
+	@echo client done!!
 
 $(SERVER): $(OBJ_SERVER) $(OBJ_UTILS)
-	$(CC) $(CFLAGS) $(OBJ_SERVER) $(OBJ_UTILS) -o $(SERVER)
+	@$(CC) $(CFLAGS) $(OBJ_SERVER) $(OBJ_UTILS) -o $(SERVER)
+	@echo server done!!
 
 bonus: all
 
 clean:
-	$(RM) $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_UTILS)
+	@$(RM) $(OBJ_CLIENT) $(OBJ_SERVER) $(OBJ_UTILS)
+	@echo objs clean!!
 
 fclean:	clean
-	$(RM) server client
+	@$(RM) server client
+	@echo compiled clean!!
 
 re: fclean all
 
 git:
 	git add .
-	git commit -m "add rule bonus"
+	git commit -m "update"
 	git push origin master
