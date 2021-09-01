@@ -33,5 +33,5 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "fixing norm"
+	git commit -m "change the message"
 	git push origin master

@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/31 21:25:13 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/09/01 09:28:20 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(void)
 		|| sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		return (-1);
+	write(1, "\nPID: ", 7);
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\n\n", 2);
 	while (1)

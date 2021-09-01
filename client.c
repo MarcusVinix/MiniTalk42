@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 14:53:48 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/31 21:20:54 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/09/01 09:31:00 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	confirm(int sig)
 {
 	(void)sig;
-	write(1, GRN"MESSAGE RECEIVED :)", 26);
+	write(1, "MESSAGE RECEIVED :)", 19);
 	write(1, "\n", 1);
 	exit(0);
 }
