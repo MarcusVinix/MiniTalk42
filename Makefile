@@ -11,7 +11,7 @@ OBJ_SERVER = $(FILES_S:.c=.o)
 OBJ_CLIENT = $(FILES_C:.c=.o)
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 all: $(CLIENT) $(SERVER)
@@ -33,5 +33,5 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "remove .o"
+	git commit -m "fixing norm"
 	git push origin master

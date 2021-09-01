@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 19:58:07 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/31 20:36:04 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/31 21:25:13 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*store_bytes(char *str, char c)
 {
 	char	*tmp;
 	int		i;
-	
+
 	tmp = malloc((ft_strlen(str) + 2) * sizeof(char));
 	if (tmp == NULL)
 	{
@@ -41,11 +41,11 @@ static char	*store_bytes(char *str, char c)
 
 static void	get_msg(int sig, siginfo_t *info, void *ucontext)
 {
-	(void)ucontext;
 	static int	byte;
 	static int	bit;
 	static char	*str;
 
+	(void)ucontext;
 	if (sig == SIGUSR2)
 		byte += 1 << (7 - bit);
 	if (++bit == 8)
@@ -84,9 +84,9 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putchar_fd(number % 10 + '0', fd);
 }
 
-int	main()
+int	main(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = get_msg;
@@ -100,4 +100,3 @@ int	main()
 		pause();
 	return (0);
 }
-

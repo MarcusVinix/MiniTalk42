@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CL=client
-PID=27778
+PID=29107
 
 echo "Testando mensagens diversas..."
 ./${CL} ${PID} "oi"

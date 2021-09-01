@@ -6,7 +6,7 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 17:06:20 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/31 18:36:06 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/31 21:21:28 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(char *s)
 {
-	size_t				len;
+	size_t	len;
 
 	len = 0;
 	if (!s)

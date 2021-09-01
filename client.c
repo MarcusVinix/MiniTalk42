@@ -6,13 +6,13 @@
 /*   By: mavinici <mavinici@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 14:53:48 by mavinici          #+#    #+#             */
-/*   Updated: 2021/08/31 20:41:07 by mavinici         ###   ########.fr       */
+/*   Updated: 2021/08/31 21:20:54 by mavinici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void confirm(int sig)
+void	confirm(int sig)
 {
 	(void)sig;
 	write(1, GRN"MESSAGE RECEIVED :)", 26);
