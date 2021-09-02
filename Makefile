@@ -39,5 +39,5 @@ re: fclean all
 
 git:
 	git add .
-	git commit -m "add mask to sigaction"
+	git commit -m "making a readme"
 	git push origin master
